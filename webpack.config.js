@@ -31,7 +31,7 @@ module.exports = {
         new webpack.LoaderOptionsPlugin({
             options: {
                 eslint: {
-                    configFile: './.eslintrc',
+                    configFile: './.eslintrc.js',
                 },
             },
         }),
