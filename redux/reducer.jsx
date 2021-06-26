@@ -5,20 +5,20 @@ const initialState = {
     {
       id: 0,
       title: '課題',
-      date: '2021-01-01',
+      date: '2021/1/1',
       info: 'テストテスト',
     },
     {
       id: 1,
       title: '課題2',
-      date: '2021-02-01',
+      date: '2021/2/1',
       info: 'testtest',
     },
   ],
   input: {
     title: '',
     info: '',
-    date: '',
+    date: null,
   },
   checked: [],
 };
@@ -38,7 +38,7 @@ const reducer = (state = initialState, action) => {
         input: {
           title: '',
           info: '',
-          date: '',
+          date: null,
         },
         memo: [...state.memo, { ...state.input, id: now.getTime() }],
       };

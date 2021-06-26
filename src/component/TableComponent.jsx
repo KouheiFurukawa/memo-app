@@ -29,7 +29,7 @@ const TableComponent = (props) => {
 };
 
 TableComponent.propTypes = {
-  state: PropTypes.arrayOf(PropTypes.number).isRequired,
+  state: PropTypes.arrayOf(PropTypes.object).isRequired,
   actions: PropTypes.shape({
     changeSelected: PropTypes.func,
   }).isRequired,

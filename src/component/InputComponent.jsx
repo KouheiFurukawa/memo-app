@@ -1,6 +1,9 @@
 import React from 'react';
+import 'date-fns';
 import PropTypes from 'prop-types';
 import { Button, TextField, Grid } from '@material-ui/core';
+import DateFnsUtils from '@date-io/date-fns';
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 
 const InputComponent = (props) => {
   const { state, actions } = props;
@@ -16,13 +19,15 @@ const InputComponent = (props) => {
             onChange={(event) => actions.changeInput('title', event)}
           />
         </Grid>
-        <Grid item>
-          <TextField
-            label="Date"
-            value={state.date}
-            onChange={(event) => actions.changeInput('date', event)}
-          />
-        </Grid>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <Grid item>
+            <KeyboardDatePicker
+              label="Date"
+              value={state.date}
+              onChange={(event) => actions.changeInput('date', event)}
+            />
+          </Grid>
+        </MuiPickersUtilsProvider>
       </Grid>
       <Grid container item spacing={2} xs={12}>
         <Grid item style={{ width: '100%' }}>
