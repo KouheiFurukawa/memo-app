@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { useMemo } from 'react';
 import { bindActionCreators } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,14 +19,11 @@ const useActions = (actions, deps) => {
   );
 };
 
-const AppContainer = (props) => {
-  const inputActions = useActions(Actions);
+const AppContainer = () => {
+  const actions = useActions(Actions);
   const inputState = useSelector((state) => state.reducer.input);
   const tableState = useSelector((state) => state.reducer.memo);
-  const selectedState = useSelector((state) => state.reducer.checked);
-
-  const inputProps = { state: inputState, inputActions, ...props };
-  const tableProps = { state: tableState, actions: inputActions, ...props };
+  const checkState = useSelector((state) => state.reducer.checked);
 
   return (
     <div>
@@ -36,15 +32,15 @@ const AppContainer = (props) => {
           <Button
             variant="contained"
             color="secondary"
-            onClick={() => inputActions.memoDelete()}
-            disabled={selectedState.length === 0}
+            onClick={() => actions.memoDelete()}
+            disabled={checkState.length === 0}
           >
             Delete
           </Button>
         </Grid>
       </Grid>
-      <Table {...tableProps} />
-      <Inputs {...inputProps} />
+      <Table state={tableState} actions={actions} />
+      <Inputs state={inputState} actions={actions} />
     </div>
   );
 };

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button, TextField, Grid } from '@material-ui/core';
 
 const InputComponent = (props) => {
-  const { state, inputActions } = props;
+  const { state, actions } = props;
 
   return (
     <Grid container spacing={2} style={{ width: '720px' }}>
@@ -13,14 +13,14 @@ const InputComponent = (props) => {
             id="standard-basic"
             label="Title"
             value={state.title}
-            onChange={(event) => inputActions.changeInput('title', event)}
+            onChange={(event) => actions.changeInput('title', event)}
           />
         </Grid>
         <Grid item>
           <TextField
             label="Date"
             value={state.date}
-            onChange={(event) => inputActions.changeInput('date', event)}
+            onChange={(event) => actions.changeInput('date', event)}
           />
         </Grid>
       </Grid>
@@ -33,7 +33,7 @@ const InputComponent = (props) => {
             rows={4}
             style={{ width: '100%' }}
             value={state.info}
-            onChange={(event) => inputActions.changeInput('info', event)}
+            onChange={(event) => actions.changeInput('info', event)}
           />
         </Grid>
       </Grid>
@@ -42,7 +42,7 @@ const InputComponent = (props) => {
           <Button
             variant="contained"
             color="primary"
-            onClick={() => inputActions.memoAdd()}
+            onClick={() => actions.memoAdd()}
           >
             Add
           </Button>
@@ -53,8 +53,15 @@ const InputComponent = (props) => {
 };
 
 InputComponent.propTypes = {
-  state: PropTypes.object.isRequired, // eslint-disable-line
-  inputActions: PropTypes.object.isRequired, // eslint-disable-line
+  state: PropTypes.shape({
+    title: PropTypes.string,
+    date: PropTypes.string,
+    info: PropTypes.string,
+  }).isRequired,
+  actions: PropTypes.shape({
+    changeInput: PropTypes.func,
+    memoAdd: PropTypes.func,
+  }).isRequired,
 };
 
 export default InputComponent;

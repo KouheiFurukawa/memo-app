@@ -29,8 +29,10 @@ const TableComponent = (props) => {
 };
 
 TableComponent.propTypes = {
-  state: PropTypes.array.isRequired, // eslint-disable-line
-  actions: PropTypes.object.isRequired, // eslint-disable-line
+  state: PropTypes.arrayOf(PropTypes.number).isRequired,
+  actions: PropTypes.shape({
+    changeSelected: PropTypes.func,
+  }).isRequired,
 };
 
 export default TableComponent;
