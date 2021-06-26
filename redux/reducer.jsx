@@ -20,24 +20,32 @@ const initialState = {
     info: '',
     date: '',
   },
+  checked: [],
 };
 
 const reducer = (state = initialState, action) => {
+  const now = new Date();
   switch (action.type) {
     case types.MEMO_DELETE:
-      state.memo.push(action.data);
-      return state;
+      return {
+        ...state,
+        checked: [],
+        memo: state.memo.filter((x) => state.checked.indexOf(x.id) === -1),
+      };
     case types.MEMO_ADD:
       return {
+        ...state,
         input: {
           title: '',
           info: '',
           date: '',
         },
-        memo: [...state.memo, { ...state.input, id: state.memo.length + 1 }],
+        memo: [...state.memo, { ...state.input, id: now.getTime() }],
       };
     case types.CHANGE_INPUT:
       return { ...state, input: { ...state.input, [action.key]: action.val } };
+    case types.CHANGE_SELECTED:
+      return { ...state, checked: action.val };
     default:
       return state;
   }

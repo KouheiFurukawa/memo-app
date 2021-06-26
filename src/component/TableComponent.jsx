@@ -11,12 +11,18 @@ const TableComponent = (props) => {
     { field: 'info', headerName: 'Info', width: 300 },
   ];
 
-  const { state } = props;
+  const { state, actions } = props;
 
   return (
     <Grid container spacing={2}>
       <Grid item style={{ height: 400, width: 700 }}>
-        <DataGrid rows={state} columns={columns} pageSize={5} />
+        <DataGrid
+          rows={state}
+          columns={columns}
+          pageSize={5}
+          checkboxSelection
+          onSelectionModelChange={(params) => actions.changeSelected(params.selectionModel)}
+        />
       </Grid>
     </Grid>
   );
@@ -24,6 +30,7 @@ const TableComponent = (props) => {
 
 TableComponent.propTypes = {
   state: PropTypes.array.isRequired, // eslint-disable-line
+  actions: PropTypes.object.isRequired, // eslint-disable-line
 };
 
 export default TableComponent;
